@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class Main {
+public class B2563 {
 	
 	public static int [][] board = new int[100][100];
 	public static void main(String[] args) {

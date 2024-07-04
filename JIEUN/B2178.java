@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 //1은 이동 가능, 0은 이동 불가능(벽)
 //최소의 칸 수 출력. 
-public class Main {
+public class B2178 {
 	
 	public static StringBuilder sb = new StringBuilder();
 
