@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.*;
+import java.util.*;  
 
 public class B24444 {
     public static ArrayList<Integer>[] graph;
