@@ -1,4 +1,4 @@
-class Solution {
+class P120892 {
     public String solution(String cipher, int code) {
         String answer = "";
         

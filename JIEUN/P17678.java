@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class P17678 {
     public String solution(int n, int t, int m, String[] timetable) {
         // 크루들 도착 시간을 분 단위로 변환하여 정렬
         int[] crewArrivalTimes = new int[timetable.length];
