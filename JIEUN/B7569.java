@@ -1,6 +1,6 @@
 import java.io.*;
 import java.util.*;
-
+  
 public class Main {
     static int M, N, H; // 가로(M), 세로(N), 높이(H) 크기 저장할 변수
     static int[][][] box; // 토마토 상자 3차원 배열
