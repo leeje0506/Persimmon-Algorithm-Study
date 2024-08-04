@@ -1,0 +1,44 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+public class Main {
+
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String str = br.readLine();
+		int N = Integer.parseInt(str);
+		int size = Integer.parseInt(br.readLine());
+
+		boolean[] tf = new boolean[10];
+		StringTokenizer st;
+		if (size != 0) {
+			st = new StringTokenizer(br.readLine(), " ");
+			for (int i = 0; i < size; i++) {
+				tf[Integer.parseInt(st.nextToken())] = true;
+			}
+			int res = Math.abs(100-N);
+
+	        for(int i=0;i<=999999;i++){
+
+	            String tem = Integer.toString(i);
+	            boolean flag=false;
+
+	            for(int j=0;j<tem.length();j++){
+	                if(tf[tem.charAt(j) - '0']){
+	                	flag=true; 
+	                    break;
+	                }
+	            }
+	            if(!flag) 
+	                res = Math.min(res,tem.length()+Math.abs(i-N));
+	        }
+	        System.out.println(res);
+		}else {
+			int res = Math.abs(100-N);
+			System.out.println(Math.min(res, str.length()));
+		}
+	}
+}
