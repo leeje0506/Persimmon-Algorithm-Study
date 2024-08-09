@@ -1,0 +1,28 @@
+class Solution {
+    public long solution(int n) {
+        String str = "";
+        
+        while(n > 0){
+            str += n % 3;
+            n = n / 3;
+        }
+        
+        long answer = Long.parseLong(str);
+        answer = change(answer);
+        
+        return answer;
+    }
+    
+    public int change(long n){
+        int tmp = 0;
+        int pow = 0;
+        
+        while(n > 0){
+            tmp += n % 10 * Math.pow(3, pow);
+            n = n / 10;
+            pow++;
+        }
+        
+        return tmp;
+    }
+}
