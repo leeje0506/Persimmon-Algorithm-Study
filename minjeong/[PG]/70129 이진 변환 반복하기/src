@@ -1,0 +1,28 @@
+class Solution {
+    static int changeCnt = 0, zeroCnt = 0;
+    
+    public int[] solution(String s) {
+        changeBinary(s);
+        int[] answer = new int[2];
+        answer[0] = changeCnt;
+        answer[1] = zeroCnt;
+        return answer;
+    }
+    
+    public static String changeBinary(String str){
+        if(str.equals("1")) return "";
+        
+        int cnt = 0;
+        for(int i = 0; i < str.length(); i++){
+            if(str.charAt(i) == '0') cnt++;
+        }
+        
+        zeroCnt += cnt;
+        
+        int c = str.replaceAll("0", "").length();
+        str = Integer.toBinaryString(c);
+        changeCnt++;
+        
+        return changeBinary(str);
+    }
+}
