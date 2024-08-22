@@ -1,0 +1,19 @@
+class Solution {
+    public String solution(int[] food) {
+        StringBuffer str = new StringBuffer();
+
+        for(int i = 1; i < food.length; i++){
+            if(food[i] % 2 != 0) {
+                food[i] = food[i]-1;
+            }
+            
+            if(food[i] != 0){
+                for(int j = 0; j < food[i]/2; j++){
+                    str.append(i);
+                }
+            }
+        }
+        
+        return str.append("0").toString() + str.reverse().substring(1, str.length());
+    }
+}
