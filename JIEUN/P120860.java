@@ -4,7 +4,7 @@ class Solution {
         int xMax = Integer.MIN_VALUE;
         int yMin = Integer.MAX_VALUE;
         int yMax = Integer.MIN_VALUE;
-        
+         
         // 각 좌표의 x값과 y값의 최소, 최대값을 구함
         for (int[] dot : dots) {
             xMin = Math.min(xMin, dot[0]);
