@@ -1,0 +1,17 @@
+class Solution {
+    public int solution(int a, int b, int n) {
+        int cnt = 0;
+        
+        while(true) {
+            if(n < a) break;
+            
+            int returns = n / a * b;
+            int remains = n % a;
+            
+            n = returns + remains;
+            cnt += returns;
+        }
+        
+        return cnt;
+    }
+}
