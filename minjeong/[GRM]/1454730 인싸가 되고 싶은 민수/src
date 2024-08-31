@@ -1,0 +1,23 @@
+import java.io.*;
+class Main {
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String[] input = br.readLine().split(" ");
+		int a = Integer.parseInt(input[0]);
+		int b = Integer.parseInt(input[1]);
+		
+		int answer = a;
+	
+		if (a != b) answer = 2;
+		else answer = divisor(a);
+		
+		System.out.println(answer);
+	}
+	
+	public static int divisor(int num){
+		for(int i = 2; i * i <= num; i++){
+				if(num % i == 0) return i;
+		}
+		return num;
+	}
+}
