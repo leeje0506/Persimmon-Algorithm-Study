@@ -1,0 +1,54 @@
+import java.io.*;
+import java.util.*;
+class Main {
+	static int N;
+	static BufferedReader br;
+	
+	public static void main(String[] args) throws Exception {
+		br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		int[][] start = new int[N][2];
+		int[][] deadline = new int[N][2];
+		
+		sortArrays(start, deadline);
+		System.out.println(getAnswer(start, deadline));
+	}
+	
+	public static void sortArrays(int[][] start, int[][] deadline) throws Exception{
+		for(int i = 0; i < N; i++){
+			String[] s = br.readLine().replaceAll("/", "0").split(" ");
+			start[i][0] = Integer.parseInt(s[0]);
+			start[i][1] = i+1;
+			deadline[i][0] = Integer.parseInt(s[1]);
+			deadline[i][1] = i+1;
+		}
+		
+		Arrays.sort(start, (o1, o2) -> {
+				if(o1[0] == o2[0]) return o2[1] - o1[1];
+			return o1[0] - o2[0];
+		});
+		
+		Arrays.sort(deadline, (o1, o2) -> {
+			return o1[0] - o2[0];
+		});
+	}
+	
+	public static String getAnswer(int[][] start, int[][] deadline){
+		Stack<Integer> stack = new Stack<Integer>();
+		
+		for(int i = 0; i < N; i++){
+			stack.push(start[i][1]);
+		}
+		
+		for(int i = 0; i < N; i++){
+			int peek = stack.peek();
+			
+			if(peek == deadline[i][1]) stack.pop();
+			else {
+				return "No";
+			}
+		}
+		
+		return "Yes";
+	}
+}
