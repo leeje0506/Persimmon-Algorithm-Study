@@ -1,0 +1,29 @@
+package GAM;
+
+import java.util.Scanner;
+
+public class BJ_1110_더하기사이클 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int N = sc.nextInt();
+		
+		int first = N;
+		int cnt = 0;
+		
+		while(true) {
+			cnt++;
+			
+			int a = N / 10;
+			int b = N % 10;
+			
+			int newNum = b*10 + (a+b) % 10;
+			N = newNum;
+			
+			if (newNum == first) break;
+		}
+	
+		System.out.println(cnt);
+		
+	}
+}
