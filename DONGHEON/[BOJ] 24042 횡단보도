@@ -1,0 +1,122 @@
+package BOJ;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class boj_24042 {
+	
+	static class node {
+		int point;
+		int order;
+		public node(int point,int order) {
+			this.point = point;
+			this.order = order;
+		}
+	}
+	
+	static class fastNode implements Comparable<fastNode>{
+		int point;
+		long time;
+		public fastNode(int point ,long time) {
+			this.point = point;
+			this.time = time;
+		}
+		
+		@Override
+		public int compareTo(fastNode o) {
+			return Long.compare(this.time, o.time);
+		}
+	}
+	
+	static int N ,M;
+	static ArrayList<ArrayList<node>> AL;
+	static long[] DP; 
+	
+	public static void main(String[] args)throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		
+		N = Integer.parseInt(st.nextToken());
+		M = Integer.parseInt(st.nextToken());
+		
+		AL = new ArrayList<ArrayList<node>>();
+		
+		for (int i = 0; i <= N; i++) {
+			AL.add(new ArrayList<node>());
+		}
+		
+		for(int i = 1; i <= M; i++) {
+			st = new StringTokenizer(br.readLine() , " ");
+			
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			
+			AL.get(a).add(new node(b, i));
+			AL.get(b).add(new node(a, i));
+						
+		}
+		
+		DP = new long[N+1];
+		
+		Arrays.fill(DP, Long.MAX_VALUE);
+		
+		DP[1] = 0;
+		
+		fn();
+		
+	}
+
+	private static void fn() {
+		
+		PriorityQueue<fastNode> pq = new PriorityQueue<>();
+		
+		pq.add(new fastNode(1, 0));
+		
+		while (!pq.isEmpty()) {
+			fastNode nn = pq.poll();
+			
+			if (nn.time > DP[nn.point]) {
+				continue;
+			}
+			
+			if (nn.point == N) {
+				System.out.println(nn.time);
+				return;
+			}
+			
+			int nOrder = (int) (nn.time % M);
+			
+			ArrayList<node> tempAL = AL.get(nn.point);
+			
+			for (int i = 0; i < tempAL.size(); i++) {
+				node tempNode = tempAL.get(i);
+				int tempPoint = tempNode.point;
+				int tempOrder = tempNode.order;
+				long time;
+				
+				if (nOrder < tempOrder) {
+					time = nn.time + tempOrder - nOrder;
+				} else {
+					time = nn.time + M - nOrder + tempOrder;
+				}
+				
+				if (time < DP[tempPoint]) {
+					DP[tempPoint] = time;
+					pq.add(new fastNode(tempPoint, time));
+				}
+				
+			}
+			
+		}
+		
+	}
+
+}
