@@ -1,0 +1,91 @@
+package BOJ;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.StringTokenizer;
+
+public class boj_1976_union {
+	
+	static int[] weight;
+	
+	public static void main(String[] args)throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int N = Integer.parseInt(br.readLine());
+		int M = Integer.parseInt(br.readLine());
+		
+		StringTokenizer st;
+		
+		weight = new int[N+1];
+		
+		Arrays.fill(weight, -1);
+		
+		for (int i = 1; i <= N; i++) {
+			
+			st = new StringTokenizer(br.readLine(), " ");
+			
+			for (int j = 1; j <= N; j++) {
+				
+				int connect = Integer.parseInt(st.nextToken());
+				
+				if (connect == 1) {
+					union(i , j);
+				}
+		
+			}
+			
+		}
+		
+		st = new StringTokenizer(br.readLine() , " ");
+		
+		int a = find(Integer.parseInt(st.nextToken()));
+		
+		boolean flag = true;
+		
+		for (int i = 0; i < M-1; i++) {
+			if(a != find(Integer.parseInt(st.nextToken()))) {
+				flag = false;
+				break;
+			}
+		}
+		
+		if (flag) {
+			System.out.println("YES");
+		}else {
+			System.out.println("NO");
+		}
+		
+	}
+	
+	private static int find(int x) {
+		if(weight[x] < 0) {
+			return x;
+		}else {
+			int tem = find(weight[x]);
+			weight[x] = tem;
+			return tem;
+		}
+	}
+	
+	private static void union(int x , int y) {
+		x = find(x);	
+		y = find(y);
+		
+		if (x == y) {
+			return ;
+		}
+		
+		if(weight[x] < weight[y]) {
+			weight[x] += weight[y];
+			weight[y] = x;
+		}else {
+			weight[y] += weight[x];
+			weight[x] = y;
+		}
+
+	}
+
+}
