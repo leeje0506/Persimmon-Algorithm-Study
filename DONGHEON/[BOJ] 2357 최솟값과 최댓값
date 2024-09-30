@@ -1,0 +1,88 @@
+package BOJ;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class boj_2357_최솟값과최댓값 {
+	
+	static class pair{
+		int min;
+		int max;
+		public pair(int min, int max) {
+			this.min = min;
+			this.max = max;
+		}
+	}
+	
+	static class SegementTree{
+		int treeSize;
+		pair[] tree;
+		
+		public SegementTree(int arrSize) {
+			int H = (int)Math.ceil(Math.log(arrSize)/Math.log(2));
+			this.treeSize = (int)Math.pow(2, H+1);
+			this.tree = new pair[treeSize];
+		}
+		
+		public pair init(int[] arr, int node, int start, int end) {
+			if (start == end) {
+				return tree[node] = new pair(arr[start] ,arr[start]);
+			}
+			
+			pair a = init(arr, node*2, start, (start+end)/2);
+			pair b = init(arr, node*2+1, (start+end)/2+1, end);
+			
+			return tree[node] = new pair(Math.min(a.min, b.min) , Math.max(a.max, b.max));
+		}
+		
+		public pair minMax(int node , int start, int end , int left, int right) {
+			
+			if (start > right || end < left) return new pair(Integer.MAX_VALUE, Integer.MIN_VALUE);
+			
+			if (start >= left && end <= right) {
+				return tree[node];
+			}
+			
+			pair a = minMax(node*2, start, (start+end)/2 ,left, right);
+			pair b = minMax(node*2+1, (start+end)/2+1, end, left, right);
+			
+			return new pair(Math.min(a.min, b.min) , Math.max(a.max, b.max));
+			
+		}
+		
+	}
+	
+	static int[] arr;
+	
+	public static void main(String[] args)throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		StringBuilder sb = new StringBuilder();
+		
+		StringTokenizer st = new StringTokenizer(br.readLine() , " ");
+		
+		int N = Integer.parseInt(st.nextToken());
+		int M = Integer.parseInt(st.nextToken());
+				
+		arr = new int[N+1];
+		
+		for (int i = 1; i <= N; i++) {
+			arr[i] = Integer.parseInt(br.readLine());
+		}
+		
+		SegementTree sTree = new SegementTree(N);
+		
+		sTree.init(arr, 1, 1, N);
+		
+		for (int i = 0; i < M; i++) {
+			st = new StringTokenizer(br.readLine() , " ");
+			pair tem = sTree.minMax(1, 1, N, Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()));
+			sb.append(tem.min + " " + tem.max).append("\n");
+		}
+		System.out.println(sb);
+	}
+
+}
