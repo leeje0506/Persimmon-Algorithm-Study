@@ -1,0 +1,99 @@
+package BOJ;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class boj_1517_버블소트 {
+	static class pair implements Comparable<pair>{
+		int value;
+		int idx;
+		
+		public pair(int value, int idx){
+			this.value = value;
+			this.idx = idx;
+		}
+
+		@Override
+		public int compareTo(pair o) {
+			if (this.value - o.value == 0) {
+				return this.idx - o.idx;
+			}
+			return this.value - o.value;
+		}
+		
+	}
+	
+	static class segementTree{
+		int treeSize;
+		int[] tree;
+		
+		public segementTree(int arrSize) {
+			int H = (int)Math.ceil(Math.log(arrSize)/Math.log(2));
+			this.treeSize = (int)Math.pow(2, H+1);
+			this.tree = new int[treeSize];
+		}
+		
+		public int sum(int node, int start, int end, int left, int right) {
+			
+			if(start > right || end < left) return 0;
+			
+			if (start >= left && end <= right) return tree[node];
+			
+			return sum(node*2, start , (start+end)/2, left, right) + sum(node*2+1, (start+end)/2+1, end, left, right);
+			
+		}
+		
+		public void update(int node , int start, int end , int idx) {
+			if(start > idx ||end < idx) return ;
+			
+			tree[node] += 1;
+			
+			if (start == end) return;
+			
+			update(node*2, start, (start+end)/2, idx);
+			update(node*2+1, (start+end)/2+1, end, idx);
+			
+		}
+		
+	}
+	
+
+	public static void main(String[] args)throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		int N = Integer.parseInt(br.readLine());
+		int[] arr = new int[N+1];
+		
+		StringTokenizer st = new StringTokenizer(br.readLine(), " ");
+		
+		PriorityQueue<pair> pq = new PriorityQueue<pair>();
+		
+		for (int i = 1; i <= N; i++) {
+			pq.add(new pair(Integer.parseInt(st.nextToken()), i));
+		}
+		
+		long result = 0;
+		
+		segementTree sTree = new segementTree(N);
+		
+		while (!pq.isEmpty()) {
+			pair tem = pq.poll();
+			
+//			System.out.println(tem.idx);
+			
+			result += sTree.sum(1, 1, N, tem.idx+1, N);
+			
+			sTree.update(1, 1, N, tem.idx);
+			
+		}
+		
+		System.out.println(result);
+		
+		
+	}
+
+}
