@@ -1,4 +1,4 @@
-class Solution {
+class P120866 {
     public int solution(int[][] board) {
         int n = board.length;
         boolean[][] danger = new boolean[n][n];

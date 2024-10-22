@@ -1,4 +1,4 @@
-class Solution {
+class P120844 {
     public int[] solution(int[] numbers, String direction) {
         int[] answer = {};
         

@@ -1,4 +1,4 @@
-class Solution {
+class P120860 {
     public int solution(int[][] dots) {
         int xMin = Integer.MAX_VALUE;
         int xMax = Integer.MIN_VALUE;

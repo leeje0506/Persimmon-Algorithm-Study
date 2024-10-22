@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class b7576 {
     static int M, N;
     static int[][] box;
     static int[] dx = {1, -1, 0, 0};

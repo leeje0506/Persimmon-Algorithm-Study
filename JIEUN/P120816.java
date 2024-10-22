@@ -1,4 +1,4 @@
-class Solution {
+class P120816 {
     public int solution(int slice, int n) {
         int answer = 0;
         

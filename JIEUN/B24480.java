@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class B24480 {
     static int N, M, R; // 정점의 수 N, 간선의 수 M, 시작 정점 R
     static ArrayList<Integer>[] graph; // 그래프의 인접 리스트
     static int[] visited; // 각 정점의 방문 순서를 저장할 배열

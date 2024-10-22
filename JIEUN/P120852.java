@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.HashSet;
 import java.util.Set;
 
-class Solution {
+class P120852 {
     public int[] solution(int n) {
         Set<Integer> factors = new HashSet<>();
         

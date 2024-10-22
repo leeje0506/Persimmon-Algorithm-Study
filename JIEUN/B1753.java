@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
 
-public class Main {
+public class B1753 {
     static final int INF = Integer.MAX_VALUE;
     static List<List<Node>> graph;
     static int[] dist;

@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.StringTokenizer;
-
 
 
 // 1번의 교환으로 만들 수 있는 가장 긴 연속 사탕의 길이를 찾는 것
@@ -11,7 +9,7 @@ import java.util.StringTokenizer;
 // 교환한 상태의 가장 긴 연속된 같은 색상의 사탕 길이를 확인.
 // 교환하기 전의 상태로 되돌려 놓는다.
 // 최대 길이를 업데이트!
-public class Main { // Main 클래스 정의
+public class Bmain { // Bmain 클래스 정의
     private static int N; // 보드의 크기를 저장할 변수 N 선언
     private static char[][] board; // 보드의 상태를 저장할 2차원 배열 board 선언
 

@@ -1,4 +1,4 @@
-class Solution {
+class P120815 {
     // 최대 공약수를 구하는 메서드 (유클리드 호제법 사용)
     public int gcd(int a, int b) {
         if (b == 0) {

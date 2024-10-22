@@ -3,7 +3,7 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.util.Stack;
 
-public class Main {
+public class B10773 {
     static Stack<Integer> stack = new Stack<>();
     
     public static void main(String[] args) throws IOException {

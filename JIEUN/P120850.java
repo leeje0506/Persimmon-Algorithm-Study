@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-class Solution {
+class P120850 {
     public List<Integer> solution(String my_string) {
         List<Integer> numbers = new ArrayList<>();  // 숫자들을 저장할 리스트
         
