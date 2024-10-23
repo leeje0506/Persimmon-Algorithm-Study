@@ -3,7 +3,7 @@
 
 import java.math.BigInteger;
 
-class Solution {
+class P128040 {
     public int solution(int balls, int share) {
         // 조합 계산 C(n, k) = n! / (k! * (n-k)!)
         BigInteger result = factorial(balls).divide(factorial(share).multiply(factorial(balls - share)));

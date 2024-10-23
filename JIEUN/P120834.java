@@ -1,4 +1,4 @@
-class Solution {
+class P120834 {
     public String solution(int age) {
         StringBuilder answer = new StringBuilder();
         String[] alpa = {"a", "b", "c", "d", "e", "f", "g", "h", "i", "j"};

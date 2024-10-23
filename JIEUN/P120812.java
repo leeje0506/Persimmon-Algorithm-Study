@@ -1,4 +1,4 @@
-class Solution {
+class P120812 {
     public int solution(int[] array) {
         int answer = 0;
         int [] number = new int[1000];

@@ -39,7 +39,7 @@
 
 
 
-class Solution {
+class P120861 {
     public int[] solution(String[] keyinput, int[] board) {
         int[] position = {0, 0}; // 초기 위치는 (0, 0)
         

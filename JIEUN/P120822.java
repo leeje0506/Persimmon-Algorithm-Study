@@ -1,4 +1,4 @@
-class Solution {
+class P120822 {
     public String solution(String my_string) {
         String answer = "";
         

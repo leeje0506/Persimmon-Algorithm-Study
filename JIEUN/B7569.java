@@ -1,7 +1,7 @@
 import java.io.*;
 import java.util.*;
   
-public class Main {
+public class B7569 {
     static int M, N, H; // 가로(M), 세로(N), 높이(H) 크기 저장할 변수
     static int[][][] box; // 토마토 상자 3차원 배열
     static int[] dx = {1, -1, 0, 0, 0, 0}; // x축 이동 배열 (오른쪽, 왼쪽)
