@@ -1,0 +1,16 @@
+class Solution {
+    public int[] solution(int n, long left, long right) {
+        int size = (int)(right-left)+1;
+        int[] answer = new int[size];
+        
+        long idx = left;
+        for(int i = 0; i < size ; i++){
+            int quo = (int)Math.floor(idx / n);
+            int rem = (int)(idx % n);
+            answer[i] = Math.max(quo, rem)+1;
+            idx++;
+        }
+        
+        return answer;
+    }
+}
