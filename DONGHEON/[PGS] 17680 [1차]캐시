@@ -1,0 +1,35 @@
+import java.util.*;
+
+class Solution {
+    
+    public int solution(int cacheSize, String[] cities) {
+        
+        if(cacheSize == 0){
+            return cities.length  * 5;
+        }
+        
+        LinkedList<String> link = new LinkedList<String>();
+                
+        int answer = 0;
+        
+        for(int i = 0; i < cities.length; i++){
+            String tem = cities[i].toLowerCase();
+            int idx = link.indexOf(tem);
+            if(idx >= 0){
+                answer += 1;
+                link.remove(idx);
+                link.offer(tem);
+            }else {
+                answer += 5;
+                link.offer(tem);
+            }
+            if(link.size() > cacheSize){
+                link.poll();
+            }
+            
+        }
+        
+
+        return answer ;
+    }
+}
