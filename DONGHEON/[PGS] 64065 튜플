@@ -50,3 +50,37 @@ class Solution {
         return answer;
     }
 }
+
+/////////////////////////////////////////////
+
+
+
+import java.util.*;
+class Solution {
+    
+    
+    public int[] solution(String s) {
+
+        StringTokenizer st =  new StringTokenizer(s , "{},");
+        
+        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        
+        while(st.hasMoreTokens()){
+            int tem = Integer.parseInt(st.nextToken());    
+            hm.put(tem , hm.getOrDefault(tem, 0) + 1);
+        }
+    
+        int size = hm.size();
+        int[] answer = new int[size];
+        
+        for(int key : hm.keySet()){
+            
+            answer[size - hm.get(key)] = key;
+            
+        }
+        
+        
+        return answer;
+    }
+}
+
