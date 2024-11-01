@@ -1,0 +1,26 @@
+package GAM;
+
+import java.util.Scanner;
+
+public class BJ_2720_세탁소사장동혁 {
+
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		
+		int T = sc.nextInt();
+		
+		for(int t = 0; t < T; t++) {
+			int money = sc.nextInt(); // 단위는 센트임
+			int[] arr = {25, 10, 5, 1}; // 쿼터, 다임, 니켈, 페니
+			
+			for(int i = 0; i < arr.length; i++) {
+
+				System.out.print(money/arr[i] + " ");				
+				
+				money = money % arr[i];
+			}
+			System.out.println();
+		}
+	}
+
+}
