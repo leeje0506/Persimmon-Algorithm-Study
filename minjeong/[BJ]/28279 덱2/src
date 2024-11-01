@@ -1,0 +1,45 @@
+package GAM;
+
+import java.io.*;
+import java.util.*;
+
+public class BJ_28279_덱2 {
+	static StringBuilder sb = new StringBuilder();
+	static Deque<Integer> deq = new ArrayDeque<>();
+	
+	
+	public static void main(String[] args) throws NumberFormatException, IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st;
+		int N = Integer.parseInt(br.readLine());
+		
+		while(N --> 0){
+			st = new StringTokenizer(br.readLine());
+			int num = Integer.parseInt(st.nextToken());
+			
+			switch(num) {
+				case 1 : deq.addFirst(Integer.parseInt(st.nextToken()));
+					break;
+				case 2 : deq.addLast(Integer.parseInt(st.nextToken()));
+					break;
+				case 3 : sb.append(deq.isEmpty() ? -1 : deq.pollFirst()).append("\n");
+					break;
+				case 4 : sb.append(deq.isEmpty() ? -1 : deq.pollLast()).append("\n");
+					break;
+				case 5 : sb.append(deq.size()).append("\n");
+					break;
+				case 6 : sb.append(deq.isEmpty() ? 1 : 0).append("\n");
+					break;
+				case 7 : sb.append(deq.isEmpty() ? -1 : deq.peekFirst()).append("\n");
+					break;
+				case 8 : sb.append(deq.isEmpty() ? -1 : deq.peekLast()).append("\n");
+					break;
+			}
+			
+		}
+		
+		br.close();
+		System.out.println(sb);
+	}
+
+}
