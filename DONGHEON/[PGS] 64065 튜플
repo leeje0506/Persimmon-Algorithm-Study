@@ -1,0 +1,86 @@
+import java.util.*;
+class Solution {
+    
+    static class pair implements Comparable<pair>{
+        int num;
+        int cnt;
+        
+        public pair(int num, int cnt){
+            this.num = num;
+            this.cnt = cnt;
+        }
+        
+        @Override
+        public int compareTo(pair o){
+            return o.cnt - this.cnt;
+        }
+        
+    }
+    
+    public int[] solution(String s) {
+
+        StringTokenizer st =  new StringTokenizer(s , "{},");
+        
+        // int count = st.countTokens();
+        
+        int[] arr = new int[100001];
+        
+        while(st.hasMoreTokens()){
+            int tem = Integer.parseInt(st.nextToken());    
+            arr[tem]++;
+        }
+        
+        PriorityQueue<pair> pq = new PriorityQueue<pair>();
+        
+        for(int i = 0; i < 100000; i++){
+            if(arr[i] != 0 ){
+                pq.add(new pair(i , arr[i]));
+            }
+        }
+    
+        int size = pq.size();
+        int[] answer = new int[size];
+        
+        for(int i = 0; i < size; i++){
+            pair tem = pq.poll();
+            answer[i] = tem.num;
+        }
+        
+        
+        return answer;
+    }
+}
+
+/////////////////////////////////////////////
+
+
+
+import java.util.*;
+class Solution {
+    
+    
+    public int[] solution(String s) {
+
+        StringTokenizer st =  new StringTokenizer(s , "{},");
+        
+        HashMap<Integer, Integer> hm = new HashMap<Integer,Integer>();
+        
+        while(st.hasMoreTokens()){
+            int tem = Integer.parseInt(st.nextToken());    
+            hm.put(tem , hm.getOrDefault(tem, 0) + 1);
+        }
+    
+        int size = hm.size();
+        int[] answer = new int[size];
+        
+        for(int key : hm.keySet()){
+            
+            answer[size - hm.get(key)] = key;
+            
+        }
+        
+        
+        return answer;
+    }
+}
+
