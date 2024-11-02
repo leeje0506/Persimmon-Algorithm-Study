@@ -1,0 +1,51 @@
+import java.util.*;
+class Solution {
+    public int solution(String str1, String str2) {
+        HashMap<String, Integer> hm1 = new HashMap<String, Integer>();
+        HashMap<String, Integer> hm2 = new HashMap<String, Integer>();
+        
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+        
+        int cnt1 = 0;
+        int cnt2 = 0;
+        int cnt3 = 0;
+
+        String[] arr1 = str1.split("[^a-zA-Z]+");
+        
+        for(int j = 0 ; j < arr1.length; j++){
+            String tem = arr1[j];
+            
+            cnt1 += tem.length()-1;
+            for(int i = 0; i < tem.length()-1; i++){
+                String sub = tem.substring(i , i+2);
+                hm1.put(sub , hm1.getOrDefault(sub, 0) + 1);
+            }
+        } 
+        
+        String[] arr2 = str2.split("[^a-zA-Z]+");
+        System.out.println("arr2.length : " + arr2.length);
+
+        
+        for(int j = 0 ; j < arr2.length; j++){
+            String tem = arr2[j];
+            cnt2 += tem.length()-1;
+            for(int i = 0; i < tem.length()-1; i++){
+                String sub = tem.substring(i , i+2);
+                hm2.put(sub , hm2.getOrDefault(sub, 0) + 1);
+            }
+        }
+        
+        for(Map.Entry<String, Integer> key : hm1.entrySet()){
+            cnt3 += Math.min(key.getValue() , hm2.getOrDefault(key.getKey(), 0));    
+        }
+        
+        
+        if(cnt1 + cnt2 == 0){
+            return 65536;
+        }else{
+            return (int) Math.floor(((double)cnt3/(cnt1+cnt2-cnt3))*65536);
+        }
+                
+    }
+}
