@@ -1,0 +1,52 @@
+import java.util.*;
+class Solution {
+    public int[] solution(String msg) {
+        
+        HashMap<String, Integer> hm = new HashMap<String, Integer>();
+        
+        for(int i = 1; i < 27; i++){
+            hm.put(((char)(i+64))+"" , i);
+        }
+        
+        int idx = 0;
+        int cnt = 27;
+        
+        LinkedList<Integer> ll = new LinkedList<Integer>();
+        
+        loop:
+        for(int i = 0; i < msg.length(); i++){
+            String w = msg.substring(i , i + 1);
+            
+            if(i == msg.length()-1) {
+            	ll.add(hm.get(w));
+            	break;
+            }
+
+            for(int j = 2; j < msg.length() - i +1; j++){
+                String tem = msg.substring(i , i + j);
+                if(hm.containsKey(tem)){
+                    w = tem;
+                    if(i + j == msg.length() ){ 
+                        ll.add(hm.get(tem));
+                        break loop;
+                    }
+                }else{
+                    hm.put(tem, cnt++);
+                    ll.add(hm.get(w));
+                    i = i+j-2;
+                    break;
+                }
+            }
+   
+        }
+        int size = ll.size();
+        
+        int[] answer = new int[size];
+        
+        for(int i = 0; i < size; i++){
+            answer[i] = ll.poll();
+        }
+        
+        return answer;
+    }
+}
