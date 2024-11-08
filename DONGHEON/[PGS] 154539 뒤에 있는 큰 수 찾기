@@ -1,0 +1,38 @@
+import java.util.*;
+class Solution {
+    public int[] solution(int[] numbers) {
+        int[] answer = new int[numbers.length];
+        
+        Stack<Integer> st = new Stack<>();
+        
+        for(int i = numbers.length-1; i >= 0; i--){
+            int tem = numbers[i];
+  
+            if(st.size() == 0 ){
+                answer[i] = -1;
+                st.add(tem);
+                continue;
+            }else if(tem < st.peek()){
+                answer[i] = st.peek();
+                st.add(tem);
+                continue;
+            }else{
+                while(!st.isEmpty() && tem >= st.peek()){
+                    st.pop();
+                }
+                if(st.size() == 0 ){
+                    answer[i] = -1;
+                    st.add(tem);
+                    continue;
+                }else {
+                    answer[i] = st.peek();
+                    st.add(tem);
+                    continue;
+                }
+            }
+ 
+        }
+        
+        return answer;
+    }
+}
