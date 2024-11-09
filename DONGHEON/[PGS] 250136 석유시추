@@ -1,0 +1,92 @@
+import java.util.*;
+class Solution {
+    
+    static class pair{
+        int r;
+        int c;
+        public pair(int r, int c){
+            this.r = r;
+            this.c = c;
+        }
+    }
+    
+    static int[] dirR = { 0, 1, 0, -1};
+    static int[] dirC = { 1, 0, -1, 0};
+    static boolean[][] tfMap;
+    static int[][] map;
+    static int cnt , r , c;
+    static LinkedList<pair> ll;
+    
+    public int solution(int[][] land) {
+		r = land.length;
+		c = land[0].length;
+
+		map = land;
+		
+		pair[][] oilMap = new pair[r][c];
+
+		tfMap = new boolean[r][c];
+		
+		int oilCnt = 0;
+		
+		for (int i = 0; i < r; i++) {
+			for (int j = 0; j < c; j++) {
+				if (land[i][j] == 1 && !tfMap[i][j]) {
+					ll = new LinkedList<pair>();
+					cnt = 1;
+					oilCnt++;
+					tfMap[i][j] = true;
+					ll.add(new pair(i, j));
+					fn(i, j);
+					while (!ll.isEmpty()) {
+						pair tem = ll.poll();
+						oilMap[tem.r][tem.c] = new pair(cnt,oilCnt-1);
+					}
+				}
+			}
+		}
+
+		int answer = 0;
+		int sum = 0;
+		boolean[] oiltf;
+		
+		for (int i = 0; i < c; i++) {
+			sum = 0;
+			oiltf = new boolean[oilCnt];
+			for (int j = 0; j < r; j++) {
+				if ( oilMap[j][i] != null && !oiltf[oilMap[j][i].c]) {
+					sum += oilMap[j][i].r;
+					oiltf[oilMap[j][i].c] = true;
+
+				}
+			}
+			answer = Math.max(answer, sum);
+		}
+
+        return answer;
+    }
+    
+    private static void fn(int row, int column) {
+		
+		Queue<pair> que = new LinkedList<pair>();
+		
+		que.add(new pair(row, column));
+		
+		while (!que.isEmpty()) {
+			
+			pair p = que.poll();
+			
+			for (int i = 0; i < 4; i++) {
+				int nr = p.r + dirR[i];
+				int nc = p.c + dirC[i];
+				if (nr >= 0 && nr < r && nc >= 0 && nc < c && !tfMap[nr][nc] && map[nr][nc] > 0) {
+					tfMap[nr][nc] = true;
+					cnt++;
+					ll.add(new pair(nr, nc));
+					que.add(new pair(nr, nc));
+				}
+			}	
+		}
+	}
+    
+}
