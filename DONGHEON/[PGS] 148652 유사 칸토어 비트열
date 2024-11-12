@@ -1,0 +1,66 @@
+import java.util.*;
+class Solution {
+    public long solution(int n, long l, long r) {
+        
+        return fn(n ,l ,r);
+    }
+    
+    private static long fn(int n, long l, long r){
+        long len = (long)Math.pow(5, n-1);
+        
+        if(n == 0){
+            return 1;
+        }
+        if( l == 1 && r == len*5){
+            return (long)Math.pow(4 , n);
+        }
+    
+        long res = 0;
+         
+        boolean left = false;  
+        
+        loop:
+        for(int i = 1; i < 6; i++){
+            
+            if(i == 3) {
+                if(!left && (i-1)*len < l && i*len >= l){
+                    if( i*len >= r ){
+                        return 0;
+                    }else{
+                        left = true;
+                        continue;
+                    }
+                }else if(i*len >= r){
+                    break loop;
+                }
+                continue;
+            }
+            
+            if(!left){
+                
+                if((i-1)*len < l && i*len >= l){
+                    
+                    if( i*len >= r ){
+                        res += fn(n-1 , l - (i-1)*len, r - (i-1)*len);
+                        break loop;
+                    }else{
+                        left = true;
+                        res += fn(n-1 , l - (i-1)*len, i*len);
+                        continue;
+                    }
+                }
+                                
+            }else if((i-1)*len < r && i*len >= r){
+                res += fn(n-1 , 1 , r - (i-1)*len);
+                break loop;
+            }else{
+                res += Math.pow(4 , n-1);
+            }
+            
+
+        }
+            
+        return res;
+        
+    }
+}
