@@ -1,0 +1,55 @@
+// import java.util.*;
+class Solution {
+    public int solution(int h1, int m1, int s1, int h2, int m2, int s2) {
+        int answer = 0;
+        
+        int circle = 43200; // 한바퀴의 기준점
+        
+        int degree_h = 1;  // 1초가 지났을 때 움직이는 양
+        int degree_m = 12;
+        int degree_s = 720;
+        
+        int second1 = h1*3600 + m1*60 + s1;
+        int second2 = h2*3600 + m2*60 + s2;
+        
+        int h = second1%circle;
+        int m = (second1*12)%circle;
+        int s = (second1*720)%circle;
+        
+        System.out.println(second2 -second1);
+        
+        boolean check = false;
+        if(s == h || s == m ){
+            answer++;
+            check = true;
+        } 
+        
+        
+        for(int i = 0; i < second2 -second1; i++){
+            h = h+1;
+            m = m+12;
+            
+            if( !check ) {
+                
+                if((h > s && h < s+720) || (h + circle > s && h + circle < s+720)) answer ++;
+                if((m > s && m < s+720) || (m + circle > s && m + circle < s+720)) answer ++;
+                
+            }else{
+               check = false; 
+            }
+               
+            if(h == s+720 || m == s+720 || h + circle == s+720 || m + circle == s+720){
+                check = true;  
+                answer++;
+            } 
+            
+            h %= circle;
+            m %= circle;
+            s = (s+720)%circle;
+            
+        }
+        
+        
+        return answer;
+    }
+}
