@@ -1,0 +1,46 @@
+import java.util.*;
+class Solution {
+    // 모서리 부분을 굳이 쳐야 하는 경우는 존재하지 않기 때문에 고려하지 않는다.
+    static int x , y , len_m , len_n;
+    public int[] solution(int m, int n, int startX, int startY, int[][] balls) {
+        int[] answer = new int[balls.length];
+        
+        len_m = m;
+        len_n = n;
+        x = startX;
+        y = startY;
+        
+        for(int i = 0; i < balls.length; i++){
+            answer[i] = distance(balls[i][0] , balls[i][1]);    
+        }
+        
+        return answer;
+    }
+    
+    static int distance(int endX , int endY){
+        int temDis = Integer.MAX_VALUE;
+        
+        if(!(x == endX && endY < y)){
+            temDis = Math.min(temDis , cal( endX , -1*endY));
+        }
+        
+        if(!(y == endY && endX > x)){
+            temDis = Math.min(temDis , cal( 2*len_m - endX , endY));
+        }
+        
+        if(!(x == endX && endY > y)){
+            temDis = Math.min(temDis , cal( endX , 2*len_n - endY));
+        }
+        
+        if(!(y == endY && endX < x)){
+            temDis = Math.min(temDis , cal( -1*endX , endY));
+        }
+        
+      return temDis;  
+    }
+    
+    static int cal(int endX , int endY){
+        return (int) (Math.pow(endX - x , 2) + Math.pow(endY - y , 2));
+    }
+    
+}
