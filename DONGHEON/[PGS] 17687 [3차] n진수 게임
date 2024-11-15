@@ -1,0 +1,29 @@
+class Solution {
+    public String solution(int n, int t, int m, int p) {
+        StringBuilder sb = new StringBuilder();
+        
+        int cnt = 0;
+        int turn = 0;
+        int num = 0;
+        p -= 1;
+        
+        while(cnt != t){
+            
+            String tem = Integer.toString(num,n);
+            
+            for(int j = 0; j < tem.length(); j++){
+                if(turn == p){
+                    char a = tem.charAt(j);   
+                    sb.append(String.valueOf(a).toUpperCase());
+                    cnt++;
+                }
+                if (cnt == t) break;
+                turn++;
+                turn %= m;
+            }
+            num++;
+        }
+
+        return sb.toString();
+    }
+}
