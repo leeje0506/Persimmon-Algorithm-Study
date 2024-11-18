@@ -39,10 +39,10 @@ class Solution {
                 if(!poll.containsValue(priority)) {
                     queue.offer(poll);
                     continue;
-                } else {
-                    answer++;
-                    countArr[priority]--;
-                }
+                } 
+
+                answer++;
+                countArr[priority]--;
             }
         }
         return answer;
