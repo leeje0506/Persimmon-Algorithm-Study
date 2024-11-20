@@ -1,0 +1,85 @@
+// 2024-11-20
+
+import java.util.*;
+class Solution {
+	static class file_name implements Comparable<file_name> {
+		String name;
+		String head;
+		int num;
+		int order;
+
+		public file_name(String name, String head, int num ,int order) {
+			this.name = name;
+			this.head = head;
+			this.num = num;
+			this.order = order;
+		}
+
+		@Override
+		public int compareTo(file_name o) {
+			if (this.head.equals(o.head)) {
+				if(this.num == o.num) {
+					return this.order -o.order;
+				}else {
+					return this.num - o.num;				
+				}
+			} else {
+				return this.head.compareTo(o.head);
+			}
+		}
+	}
+    public String[] solution(String[] files) {
+		PriorityQueue<file_name> pq = new PriorityQueue<>();
+
+		for (int i = 0; i < files.length; i++) {
+			String tem = files[i];
+			int len = tem.length();
+			boolean flag = true;
+			String head = "";
+			int idx = 0;
+
+			for (int j = 0; j < len; j++) {
+				char cha = tem.charAt(j);
+				if (flag) {
+					if (cha >= 48 && cha <= 57) {
+						if(j == len-1){
+							System.out.println(Integer.parseInt(tem.substring(j , j+1)));
+                            pq.add(new file_name(tem , tem.substring(0 , j).toUpperCase() , Integer.parseInt(tem.substring(j , j+1)) , i));
+                            break;
+                        }
+						head = tem.substring(0, j).toUpperCase();
+						idx = j;
+						flag = false;
+					}
+				} else {
+
+					if (cha >= 48 && cha <= 57) {
+						if(j - idx == 4 || j == len-1) {
+							pq.add(new file_name(tem, head, Integer.parseInt(tem.substring(idx, j+1)), i));
+							break;
+						}
+					}else {						
+						pq.add(new file_name(tem, head, Integer.parseInt(tem.substring(idx, j)), i));
+						break;
+					}
+					
+				}
+			}
+		}
+
+		String[] answer = new String[files.length];
+		
+		for (int i = 0; i < files.length; i++) {
+			answer[i] = pq.poll().name;
+		}
+        
+        return answer;
+    }
+}
+
+
+
+// priorityqueue 같은 레벨의 개체에 대해서도 들어간 순서를 보장해주지 않는다.
+// 그래서 class를 생성할 때 order를 만들어 주어 compareTo 할때 사용하도록 만들었다. 
+
+//문제를 잘못 읽으면 큰일이난다. tail 부분은 정렬을 할때 필요가 없는 부분인데 이것을 이해하지 못해서 문제를 풀때 계속 돌아갔다. 함정인 부분이 몇 군데 존재한다.
