@@ -1,0 +1,55 @@
+//20224-11-20 풀이
+
+import java.util.*;
+class Solution {
+    static class pair implements Comparable<pair>{
+        int num;
+        int cnt;
+        public pair(int num , int cnt){
+            this.num = num;
+            this.cnt = cnt;
+        }
+        
+        @Override
+        public int compareTo(pair o){
+            return this.cnt - o.cnt;
+        }
+        
+    }
+    
+    public int solution(int x, int y, int n) {
+        int answer = 0;
+        
+        boolean[] tf = new boolean[1000001];
+        
+        PriorityQueue<pair> pq =new PriorityQueue<>();
+        
+        pq.add(new pair(x ,0));
+        tf[x] = true;
+
+        while(!pq.isEmpty()){
+            pair p = pq.poll();
+            
+            int num = p.num;
+
+            if(num == y){
+                return p.cnt;
+            }else if(num < y){
+                if(num+n <= 1000000 && !tf[num+n] && num+n <= y){
+                    tf[num+n] = true;
+                    pq.add(new pair(num+n ,p.cnt+1));
+                }
+                if(num*2 <= 1000000 &&!tf[num*2] && num*2 <= y){
+                    tf[num*2] = true;
+                    pq.add(new pair(num*2 ,p.cnt+1));
+                }
+                if(num*3 <= 1000000 &&!tf[num*3] && num*3 <= y){
+                    tf[num*3] = true;
+                    pq.add(new pair(num*3 ,p.cnt+1));
+                }                
+            }
+        }
+        
+        return -1;
+    }
+}
