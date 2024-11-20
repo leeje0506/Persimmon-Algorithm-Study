@@ -1,0 +1,97 @@
+import java.util.*;
+
+
+
+class Solution {
+    static class pair implements Comparable<pair>{
+        String car_number;
+        int car_minute;
+
+        public pair(String car_number , int car_minute){
+            this.car_number = car_number;
+            this.car_minute = car_minute;
+        }
+
+        @Override
+        public int compareTo(pair o){
+            return this.car_number.compareTo(o.car_number);
+        }
+    }
+    
+    static int cal(String start, String end){
+        StringTokenizer st = new StringTokenizer(start , ":");
+        int sh = Integer.parseInt(st.nextToken());
+        int sm = Integer.parseInt(st.nextToken());
+        
+        st = new StringTokenizer(end , ":");
+        int eh = Integer.parseInt(st.nextToken());
+        int em = Integer.parseInt(st.nextToken());
+        
+        return (eh - sh)*60 + em - sm;
+        
+    }
+    
+    public int[] solution(int[] fees, String[] records) {
+        
+        int a = fees[0];
+        int b = fees[1];
+        int c = fees[2];
+        int d = fees[3];
+        
+        HashMap<String , String> hm = new HashMap<>();
+        HashMap<String , Integer> result = new HashMap<>();
+        
+
+        
+        for(int i = 0; i < records.length; i++){
+            StringTokenizer st = new StringTokenizer(records[i] , " ");
+            String time = st.nextToken();
+            String car_num = st.nextToken();
+            String state = st.nextToken();
+
+            if(state.equals("IN")){
+                hm.put(car_num , time);
+            }else{
+                String tem = hm.get(car_num);
+                int minute = cal(tem , time);
+                result.put(car_num , result.getOrDefault(car_num , 0) + minute);
+                hm.remove(car_num);
+            }
+            
+        }
+        
+        for(Map.Entry<String,String> e : hm.entrySet()){
+            int minute = cal(e.getValue() , "23:59");            
+            result.put(e.getKey() , result.getOrDefault(e.getKey() , 0) + minute);
+        }
+        
+          
+        PriorityQueue<pair> pq = new PriorityQueue<>();
+        
+        for(Map.Entry<String,Integer> e : result.entrySet()){
+            pq.add(new pair(e.getKey() , e.getValue()));
+        }
+        
+        int[] answer = new int[pq.size()];
+
+        for(int i = 0; i < answer.length; i++){
+            int tem_minute = pq.poll().car_minute;
+            
+            tem_minute -= a;
+
+            
+            if(tem_minute > 0){
+                answer[i] = b + (int)Math.ceil((double)tem_minute/c)*d;
+            }else{
+                answer[i] = b;
+            }
+
+        }
+            
+        
+        return answer;
+    }
+
+    
+}
+
