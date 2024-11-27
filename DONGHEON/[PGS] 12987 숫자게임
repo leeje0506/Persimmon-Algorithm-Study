@@ -1,0 +1,27 @@
+import java.util.*;
+class Solution {
+    public int solution(int[] A, int[] B) {
+        
+        Arrays.sort(A);
+        
+        PriorityQueue<Integer> pq = new PriorityQueue<>();
+        
+        for(int i = 0; i < B.length; i++){
+            pq.add(B[i]);
+        }
+
+        int idx =0;
+        int answer = 0;
+        
+        while(!pq.isEmpty()){
+            int num = pq.poll();
+            if(A[idx] < num){
+                idx++;
+                answer++;
+            }
+        }
+        
+        
+        return answer;
+    }
+}
