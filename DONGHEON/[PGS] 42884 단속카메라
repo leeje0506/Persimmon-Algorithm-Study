@@ -1,0 +1,44 @@
+import java.util.*;
+class Solution {
+    static class pair implements Comparable<pair>{
+        int start;
+        int end;
+
+        public pair(int start , int end){
+            this.start = start;
+            this.end = end;
+        }
+
+        @Override
+        public int compareTo(pair o){
+            return this.start - o.start;
+        }
+    }
+
+    public int solution(int[][] routes) {
+        
+        
+        PriorityQueue<pair> pq = new PriorityQueue<>();
+        
+        for(int i = 0; i < routes.length; i++){
+            pq.add(new pair(routes[i][0] , routes[i][1]));
+        }
+        
+        pair tem = pq.poll();
+        int ep = tem.end;
+        int answer = 1;
+        while(!pq.isEmpty()){
+            tem = pq.poll();
+            if(ep < tem.start){
+                answer++;
+                ep = tem.end;
+            }else{
+                if(tem.end < ep){
+                    ep = tem.end;
+                }
+            }
+        }
+        
+        return answer;
+    }
+}
