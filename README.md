@@ -26,11 +26,11 @@
 <br />
 
 ## ✅ commit 규칙
-- commit 메세지: [문제 출처(플랫폼)] 문제이름 / 난이도  
+- commit 메시지: [주제]문제이름/난이도
 - description: 문제 주소 (option)
 - 터미널에서 작성법: 
 ```
-git commit -m "[BOJ] Hello World / 브론즈5 " -m "https://www.acmicpc.net/problem/2557"
+git commit -m “[구현] Hello World / 브론즈5” -m "https://www.acmicpc.net/problem/2557”`
 ```
 - 플랫폼 작성법 통일: 
   * [BOJ] - 백준 
@@ -43,8 +43,8 @@ git commit -m "[BOJ] Hello World / 브론즈5 " -m "https://www.acmicpc.net/prob
 <br />
 
 ## ✅ PR 규칙
-- PR 제목: 이름 / 주차 / 몇 문제
--  ```jieun lee / 3월 1주차 / 4문제 ```
+- PR 제목: id/[주제]/문제이름/난이도
+-  ```leeje0506 / [구현] Hello World / 브론즈5```
 -  comment은 템플릿에 따라 작성 :)
 <br />
 <br />
@@ -60,6 +60,19 @@ git commit -m "[BOJ] Hello World / 브론즈5 " -m "https://www.acmicpc.net/prob
 - 코드의 일부분에다 코드리뷰를 해도 되고 전체 코드 밑 or PR 하나 밑에다 코멘트 작성으로 리뷰를 해도 됩니다.
 <br />
 <br />
+
+## 2024 스터디 종료
+
+## ✅ 2025 스터디 기간
+1차 : 2025.01.06~2025.03.09
+
+1단위기간 : 2025.01.06 ~ 2025.01.26 (실버1)
+2단위기간 : 2025.01.27 ~ 2025.02.16 (골드5-4)
+3단위기간 : 2025.02.16 ~ 2025.03.09 (골드3 이상)
+
+1주차 : dfs/bfs, 구현/시뮬레이션, 힙
+2주차 : 이분탐색, 그리디, dp
+3주차 : 완전탐색, 그래프, 다익스트라
 
 ## ✅ 참여자
 ### 🎉 스터디 참여 🎉
