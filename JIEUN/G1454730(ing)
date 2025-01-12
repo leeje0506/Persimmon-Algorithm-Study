@@ -1,0 +1,56 @@
+import java.io.*;
+import java.util.*;
+
+public class Bmain {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        String[] input = br.readLine().split(" ");
+        long a = Long.parseLong(input[0]);
+        long b = Long.parseLong(input[1]);
+        
+        // 약수의 빈도를 저장할 해시맵
+        Map<Long, Integer> divisorCount = new HashMap<>();
+        
+        // a부터 b까지의 각 숫자의 약수를 구함
+        for (long i = a; i <= b; i++) {
+            Set<Long> divisors = getDivisors(i);
+            for (long divisor : divisors) {
+                if (divisor != 1) {
+                    divisorCount.put(divisor, divisorCount.getOrDefault(divisor, 0) + 1);
+                }
+            }
+        }
+        
+        // 가장 많이 나온 약수를 찾기 위한 변수 초기화
+        long mostFrequentDivisor = Long.MAX_VALUE;
+        int maxCount = 0;
+        
+        // 해시맵을 순회하며 가장 높은 빈도의 약수를 찾음
+        for (Map.Entry<Long, Integer> entry : divisorCount.entrySet()) {
+            long divisor = entry.getKey();
+            int count = entry.getValue();
+            
+            if (count > maxCount || (count == maxCount && divisor < mostFrequentDivisor)) {
+                maxCount = count;
+                mostFrequentDivisor = divisor;
+            }
+        }
+        
+        // 결과 출력
+        System.out.println(mostFrequentDivisor);
+    }
+    
+    // 약수를 구하는 메서드
+    public static Set<Long> getDivisors(long n) {
+        Set<Long> divisors = new HashSet<>();
+        
+        for (long i = 1; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) {
+                divisors.add(i);
+                divisors.add(n / i);
+            }
+        }
+        
+        return divisors;
+    }
+}
