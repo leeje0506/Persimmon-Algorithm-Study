@@ -43,7 +43,7 @@ git commit -m “[구현] Hello World / 브론즈5” -m "https://www.acmicpc.ne
 <br />
 
 ## ✅ PR 규칙
-- PR 제목: id/[주제]/문제이름/난이도
+- PR 제목: id/[주제]문제이름/난이도
 -  ```leeje0506 / [구현] Hello World / 브론즈5```
 -  comment은 템플릿에 따라 작성 :)
 <br />
