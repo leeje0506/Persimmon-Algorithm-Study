@@ -55,7 +55,9 @@ public class B12761 {
                     pos -1,
                     pos +1,
                     pos +a,
+                    pos -a,
                     pos +b,
+                    pos -b,
                     pos *a,
                     pos *b
             };
