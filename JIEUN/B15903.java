@@ -10,6 +10,10 @@ public class B15903 {
         int n = Integer.parseInt(st.nextToken()); // 카드 개수
         int m = Integer.parseInt(st.nextToken()); // 합체 횟수
 
+        if (n < 2) {
+            throw new IllegalArgumentException("카드의 개수는 2 이상이어야 합니다.");
+        }
+
         PriorityQueue<Long> pq = new PriorityQueue<>();
         st = new StringTokenizer(br.readLine());
         for (int i = 0; i < n; i++) {
@@ -18,11 +22,15 @@ public class B15903 {
 
         //합체 과정
         for (int i = 0; i < m; i++) {
-            long first = pq.poll();  // 가장 작은 값
-            long second = pq.poll(); // 두 번째로 작은 값
+            if (pq.size() < 2) {
+                throw new IllegalStateException("큐에 값이 충분하지 않습니다.");
+            }
 
-            long sum = first + second; // 두 값의 합
-            pq.add(sum);  // 합친 값을 두 번 삽입
+            long first = pq.poll();
+            long second = pq.poll();
+
+            long sum = first + second;
+            pq.add(sum);
             pq.add(sum);
         }
 
