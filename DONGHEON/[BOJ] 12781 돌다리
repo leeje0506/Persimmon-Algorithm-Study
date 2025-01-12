@@ -1,0 +1,72 @@
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Iterator;
+import java.util.PriorityQueue;
+import java.util.StringTokenizer;
+
+public class boj_12761_돌다리_실버1 {
+	
+	static class pair implements Comparable<pair>{
+		int num;
+		int cnt;
+		public pair(int num , int cnt) {
+			this.num = num;
+			this.cnt = cnt;
+		}
+		
+		@Override
+		public int compareTo(pair O) {
+			return this.cnt - O.cnt;
+		}
+		
+	}
+
+	public static void main(String[] args)throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		
+		int a = Integer.parseInt(st.nextToken());
+		int b = Integer.parseInt(st.nextToken());
+		int n = Integer.parseInt(st.nextToken());
+		int m = Integer.parseInt(st.nextToken());
+		
+		boolean[] visted = new boolean[100001];
+		
+		PriorityQueue<pair> pq = new PriorityQueue<pair>();
+		
+		int[] arr = {1 ,-1, a, b, -a, -b};
+		
+		pq.add(new pair(n, 0));
+		visted[n] = true;
+		
+		while(!pq.isEmpty()) {
+			pair tem = pq.poll();
+			
+			if(tem.num == m) {
+				System.out.println(tem.cnt);
+				break;
+			}
+			
+			for(int i =0; i < 6; i++) {
+				int nn = tem.num + arr[i];
+				if(nn >= 0 && nn <= 100000 && !visted[nn]) {
+					pq.add(new pair( nn, tem.cnt + 1));
+					visted[nn] =true;
+				}
+			}
+			int nn = tem.num*a;
+			if(nn >= 0 && nn <= 100000 && !visted[nn]) {
+				pq.add(new pair( nn, tem.cnt + 1));
+				visted[nn] =true;
+			}
+			nn = tem.num*b;
+			if(nn >= 0 && nn <= 100000 && !visted[nn]) {
+				pq.add(new pair( nn, tem.cnt + 1));
+				visted[nn] =true;
+			}
+		}
+		
+	}
+
+}
