@@ -7,6 +7,9 @@ import java.io.InputStreamReader;
 public class boj_16113_시그널_silver1 {
 
 	public static void main(String[] args)throws IOException {
+		//아래로 5칸이 모두 있는 경우 0 <가운데가 비어 있다>, 1 <시작점 바로 오른쪽이 비어 있다> , 6 , 8
+		//2, 3 , 4 <시작점 바로 오른쪽이 비어 있다>, 5, 7 , 9
+		// 3, 4, 7,  9
 		
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
