@@ -1,0 +1,81 @@
+package BOJ;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+public class boj_1062_가르침 {
+	
+	static String[] str;
+	static int n , k ,result;
+	static boolean[] tf;
+
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		
+		StringTokenizer st = new StringTokenizer(br.readLine() , " ");
+		
+		n = Integer.parseInt(st.nextToken());
+		k = Integer.parseInt(st.nextToken());
+		
+		str = new String[n];
+		tf = new boolean[26];
+		result = 0;
+		
+		if(k < 5) {
+			System.out.println(0);
+			return;
+		}else if(k == 26) {
+			System.out.println(n);
+			return;
+		}
+		
+		for(int i = 0; i < n; i++) {
+			String tem = br.readLine();
+			str[i] = tem.substring(4 , tem.length()-4);
+		}
+		//antic		
+		tf['a' - 'a'] = true;
+		tf['n' - 'a'] = true;
+		tf['t' - 'a'] = true;
+		tf['i' - 'a'] = true;
+		tf['c' - 'a'] = true;
+				
+		com(0 , 5);
+		
+		System.out.println(result);	
+	}
+
+	private static void com(int idx, int cnt) {
+		if(cnt == k) {
+			check();
+		}
+		
+		for(int i = idx; i < 26; i++) {
+			if(!tf[i]) {
+				tf[i] = true;
+				com(i , cnt + 1);
+				tf[i] = false;
+			}
+		}
+		
+	}
+
+	private static void check() {
+		int count = 0; 
+		flag:
+		for(int i = 0; i < n; i++) {
+			String temp = str[i];
+			for (int j = 0; j < temp.length(); j++) {
+				if(!tf[temp.charAt(j) - 'a']) {
+					continue flag;					
+				}
+			}
+			count++;
+		}
+		result = Math.max(count, result);
+	}
+
+}
